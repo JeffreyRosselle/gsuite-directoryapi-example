@@ -1,4 +1,3 @@
-﻿using System;
 using System.Threading.Tasks;
 using Google.Apis.Admin.Directory.directory_v1;
 using Google.Apis.Admin.Directory.directory_v1.Data;
@@ -33,8 +32,11 @@ namespace GSuiteDirectoryApiExample
 
         private DirectoryService InitDirectoryService(string appName, string auth, string admin)
         {
+            //You can also import from file
             var credentials = GoogleCredential.FromJson(auth)
+                //Just adding one scope to manage users
                 .CreateScoped(new string[] { DirectoryService.ScopeConstants.AdminDirectoryUser })
+                //Impersonating an admin user
                 .CreateWithUser(admin)
                 .UnderlyingCredential as ServiceAccountCredential;
 
